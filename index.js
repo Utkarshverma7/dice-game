@@ -14,3 +14,14 @@ var randomdimagesource2="images/dice"+randomNumber2+".png";
 
 
 document.querySelectorAll("img")[1].setAttribute("src",randomdimagesource2);
+
+if (randomNumber>randomNumber2){
+    document.querySelectorAll("h1").innerHTML="Player 1 wins!";
+
+}
+else if (randomNumber2>randomNumber){
+    document.querySelectorAll("h1").innerHTML="Player 2 wins";
+}
+else{
+    document.querySelectorAll("h1").innerHTML="it's a draw";
+}
