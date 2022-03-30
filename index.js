@@ -1,27 +1,40 @@
+(function () {
+  const ghResource = "https://raw.githubusercontent.com/Utkarshverma7/dice-game/master/images/";
 
-var randomNumber=Math.floor(Math.random()*6)+1;
+  function createRandom() {
+    return Math.floor(Math.random() * 6) + 1;
+  }
 
-var randomdiceimage="dice"+randomNumber+".png";
+  function setDiceImage(diceElement, diceNumber = createRandom()) {
+    let diceSrc = `${ghResource}dice${diceNumber}.png`;
+    diceElement.setAttribute(`src`, diceSrc);
+  }
 
-var randomimagesource="images/"+randomdiceimage;
+  function checkWinner(firstDice, secondDice) {
+    const winnerTitle = document.querySelector('h1');
 
-var image1 =document.querySelectorAll("img")[0];
+    if (firstDice > secondDice)
+      return winnerTitle.innerHTML = `Player 1 win!`;
 
-image1.setAttribute("src",randomimagesource);
+    if (firstDice < secondDice)
+      return winnerTitle.innerHTML = `Player 2 win!`;
 
-var randomNumber2=Math.floor(Math.random()*6)+1;
-var randomdimagesource2="images/dice"+randomNumber2+".png";
+    winnerTitle.innerHTML = `No Wins, Draw!`;
+  }
 
+  function createDice() {
+    const diceImage_1 = document.querySelector("#dice-1");
+    const diceImage_2 = document.querySelector('#dice-2');
 
-document.querySelectorAll("img")[1].setAttribute("src",randomdimagesource2);
+    const diceNumber_1 = createRandom();
+    const diceNumber_2 = createRandom();
 
-if (randomNumber>randomNumber2){
-    document.querySelectorAll("h1").innerHTML="Player 1 wins!";
+    setDiceImage(diceImage_1, diceNumber_1);
+    setDiceImage(diceImage_2, diceNumber_2);
 
-}
-else if (randomNumber2>randomNumber){
-    document.querySelectorAll("h1").innerHTML="Player 2 wins";
-}
-else{
-    document.querySelectorAll("h1").innerHTML="it's a draw";
-}
+    checkWinner(diceNumber_1, diceNumber_2);
+  }
+
+  createDice();
+  window.onclick = () => createDice();
+})();
